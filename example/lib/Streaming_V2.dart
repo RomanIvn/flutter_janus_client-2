@@ -111,14 +111,16 @@ class _StreamingState extends State<StreamingV2> {
       }
 
       if (even.jsep != null) {
-        debugPrint("Handling SDP as well..." + even.jsep.toString());
-        await plugin.handleRemoteJsep(even.jsep);
-        RTCSessionDescription answer = await plugin.createAnswer();
-        plugin.send(data: {"request": "start"}, jsep: answer);
-        Navigator.of(context).pop();
-        setState(() {
-          _loader = false;
-        });
+        if (even.jsep.type != 'answer') {
+          debugPrint("Handling SDP as well..." + even.jsep.toString());
+          await plugin.handleRemoteJsep(even.jsep);
+          RTCSessionDescription answer = await plugin.createAnswer();
+          plugin.send(data: {"request": "start"}, jsep: answer);
+          Navigator.of(context).pop();
+          setState(() {
+            _loader = false;
+          });
+        }
       }
     });
   }

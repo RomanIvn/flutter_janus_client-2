@@ -274,6 +274,9 @@ class JanusPlugin {
       }
       RestJanusTransport rest = (transport as RestJanusTransport);
       response = await rest.post(request, handleId: handleId);
+
+      _messagesStreamController.sink.add(EventMessage(event: response, jsep: jsep));
+
       return response;
     } catch (e) {
       print(e);
