@@ -1,2 +1,4 @@
-# flutter_janus_client-2
- 
+A custom version of:
+https://github.com/flutterjanus/flutter_janus_client
+
+Including only Sound Stream listener with JSON transport functionalities
