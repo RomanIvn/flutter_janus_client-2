@@ -39,7 +39,7 @@ class _StreamingState extends State<StreamingV2> {
 
   initJanusClient() async {
     setState(() {
-      j = JanusClient(transport: RestJanusTransport(url: 'https://192.168.1.20:8089/janus'), iceServers: []);
+      j = JanusClient(transport: RestJanusTransport(url: 'https://10.0.0.1:8089/janus'), iceServers: []);
     });
     session = await j.createSession();
     plugin = await session.attach(JanusPlugins.STREAMING);
@@ -111,7 +111,7 @@ class _StreamingState extends State<StreamingV2> {
       }
 
       if (even.jsep != null) {
-        if (even.jsep.type != 'answer') {
+        if (even.jsep.type == 'offer') {
           debugPrint("Handling SDP as well..." + even.jsep.toString());
           await plugin.handleRemoteJsep(even.jsep);
           RTCSessionDescription answer = await plugin.createAnswer();

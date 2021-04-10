@@ -104,7 +104,10 @@ class JanusPlugin {
     }
     print('peer connection configuration');
     print(configuration);
-    RTCPeerConnection peerConnection = await createPeerConnection(configuration, {});
+    RTCPeerConnection peerConnection = await createPeerConnection(configuration, {
+      'video': false,
+      'audio': true,
+    });
 
     // source for onRemoteStream
     peerConnection.onAddStream = (mediaStream) {
